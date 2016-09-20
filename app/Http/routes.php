@@ -27,6 +27,16 @@ Route::group(['middleware' => 'web'], function () {
 
     // Authentication Routes...
     Route::auth();
+    
+	/*
+	 * Employee controller for routing
+	 */    
+    Route::get('/employees', 'EmployeeController@index');
+    Route::get('/newemployee', 'EmployeeController@create');
+    Route::post('/employee', 'EmployeeController@store');
+    Route::delete('/employee/{employee}', 'EmployeeController@destroy');
+    
+    
 });
 
 

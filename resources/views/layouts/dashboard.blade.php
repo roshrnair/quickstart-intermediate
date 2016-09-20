@@ -12,7 +12,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ url ('') }}">YRP v2.0 | HRM</a>
+                <a class="navbar-brand" href="{{ url ('') }}">Yukti | Human Capital Management</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -56,6 +56,19 @@
                         <! -- YIS::Removed Tables -->
                         <! -- YIS::Removed Forms -->
 						<! -- YIS::Removed UI Elements -->
+						
+						<li>
+							<a href="#"><i class="fa fa-sitemap fa-fw"></i> Employees<span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+                                <li {{ (Request::is('*employees') ? 'class="active"' : '') }}>
+                                    <a href="{{ url ('employees') }}">List Employees</a>
+                                </li>
+                                <li {{ (Request::is('*employees') ? 'class="active"' : '') }}>
+                                    <a href="{{ url ('newemployee') }}">New Employee</a>
+                                </li>
+							</ul>
+						</li>
+						
 						                        
                         <li>
                             <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>

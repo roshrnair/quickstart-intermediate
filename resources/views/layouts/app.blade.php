@@ -41,7 +41,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="/">
-                    Human Resource Management
+                    Human Capital Management
                 </a>
             </div>
 
