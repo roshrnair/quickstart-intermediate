@@ -75,7 +75,13 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        //
+    	$employee = Employee::find($id);
+    	if (is_null($employee))
+    	{
+    		return Redirect::route('employee.index');
+    	}
+    	//return View::make('employees.edit', compact('employee'));
+    	return view('employees.edit', array_merge(compact('employee')));
     }
 
     /**
@@ -87,7 +93,6 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
     }
 
     /**
@@ -96,8 +101,9 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, Employee $employee)
     {
-        //
+		$employee->delete();
+		return redirect('/employees');
     }
 }
