@@ -34,18 +34,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/employees', 'EmployeeController@index');
     Route::get('/newemployee', 'EmployeeController@create');
     Route::post('/employee', 'EmployeeController@store');
-    //Route::delete('/employee/{employee}', 'EmployeeController@destroy');
-    Route::get('/employee/{employee}/edit', 'EmployeeController@edit');
-    Route::post('/updateemployee', 'EmployeeController@update');
+    Route::delete('/employee/{employee}', 'EmployeeController@destroy');
     
-    Route::patch('/employee/{employee}/edit',[
-    		'as' => 'employee.edit',
-    		'uses' => 'EmployeeController@edit'
-    ]);
-    Route::delete('/employee/{employee}',[
-    		'as' => 'employee.destroy',
-    		'uses' => 'EmployeeController@destroy'
-    ]);
     
 });
 

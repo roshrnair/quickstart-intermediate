@@ -2,6 +2,12 @@
 @section('page_heading','Employees')
 @section('section')
            
+           
+	@if ($message = Session::get('success'))
+        <div class="alert alert-success">
+            <p>{{ $message }}</p>
+        </div>
+    @endif
            <!-- Current Tasks -->
     @if (count($employees) > 0)
     	<div class="panel panel-default">
@@ -9,41 +15,50 @@
     			<table class="table table-striped task-table">
     				<!-- Table Headings -->
     				<thead>
-    					 <th>Employee Name</th>
-    					 <th>&nbsp;</th>
-    					 <th>&nbsp;</th>
+    					<th>No.</th>
+    					<th>Employee Name</th>
+    					<th>&nbsp;</th>
+    					<th>&nbsp;</th>
     				</thead>
     				
     				<!-- Table Body -->
     				<tbody>
-    					@foreach ($employees as $employee)
+    					@foreach ($employees as $key => $employee)
     						<tr>
+    							<td>{{ ++$i }}</td>
     							<!-- Employee Name -->
     							<td class="table-text">
     								<div>{{ $employee->name }}</div>
     							</td>
     							<td>
-    								<!-- Edit Button -->
+    								<table>
+	    								<tr>
+		    								<td><a class="btn btn-info" href="{{ route('cntEmployee.show',$employee->id) }}"><i class="fa fa-btn fa-binoculars"></i>&nbsp;Show&nbsp;&nbsp;</a>&nbsp;</td>
+		    								<td><a class="btn btn-primary" href="{{ route('cntEmployee.edit',$employee->id) }}"><i class="fa fa-btn fa-edit"></i>&nbsp;Edit&nbsp;&nbsp;&nbsp;</a>&nbsp;</td>
+		    								<td>
+			    								 <!-- Delete Button -->
+			    								 <form action="{{ url('employee/'.$employee->id) }}" method="POST">
+			    								 	 {{ csrf_field() }}
+			    								 	  {{ method_field('DELETE') }}
+			    								 	  
+			    								 	  <button type="submit" id="delete-employee-{{ $employee->id }}" class="btn btn-danger" value = "Delete">
+			    								 	  	<i class="fa fa-btn fa-trash"></i>&nbsp;Delete
+			    								 	  </button>
+			    								 </form>
+		    								</td>
+	    								</tr>
+    								</table>
     								
-    								<a href="{{ route('employee.edit', $employee->id) }}" class="btn btn-primary">
-    								<i class="fa fa-btn fa-pencil-square-o"></i>&nbsp;Edit
-    								</a>
-    							</td>
-    							<td>
-    								<!-- Delete Button -->
-    								 <form action="{{ url('employee/'.$employee->id) }}" method="POST">
-    								 	 {{ csrf_field() }}
-    								 	  {{ method_field('DELETE') }}
-    								 	  
-    								 	  <button type="submit" id="delete-employee-{{ $employee->id }}" class="btn btn-danger" value = "Delete">
-    								 	  	<i class="fa fa-btn fa-trash"></i>&nbsp;Delete
-    								 	  </button>
-    								 </form>
+    								
+
+ 
     							</td>
     						</tr>
     					@endforeach
     				</tbody>
     			</table>
+    			
+    			{!! $employees->render() !!}
     		</div>
     	</div>
     @else
